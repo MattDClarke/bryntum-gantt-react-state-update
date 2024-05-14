@@ -1,0 +1,24 @@
+[
+  {
+    "id": "4b75b7f3-e719-4bc5-b74b-9abacde7d557",
+    "type": 2,
+    "lag": 0,
+    "lagUnit": "day",
+    "active": 1,
+    "from": "22483ef3-9a9d-4584-a9a7-3a7604916b3b",
+    "to": "465f8424-6c51-4f26-93c0-fc1b6b6ea177",
+    "fromSide": "end",
+    "toSide": "start"
+  },
+  {
+    "id": "cddad7d1-611a-4f90-a839-1ba92c245cd4",
+    "type": 2,
+    "lag": 0,
+    "lagUnit": "day",
+    "active": 1,
+    "from": "465f8424-6c51-4f26-93c0-fc1b6b6ea177",
+    "to": "ad1ee48f-090a-4e9a-b4c0-4e8dcbdec1e5",
+    "fromSide": null,
+    "toSide": null
+  }
+]
