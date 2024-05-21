@@ -4,12 +4,10 @@ import "./App.scss";
 import { ganttConfig } from "./ganttConfig";
 
 function App() {
-  const [data, setData] = React.useState();
+  const [data, setData] = React.useState(null); // Initialize data with null or an empty object
   console.log("App component rendered", data);
   const gantt = React.useRef();
 
-
-  
   React.useEffect(() => {
     fetchRecords();
   }, []);
@@ -21,84 +19,24 @@ function App() {
         name: "Research",
         startDate: "2024-08-04T22:00:00Z",
         endDate: "2024-08-11T22:00:00Z",
-        effort: null,
-        effortUnit: null,
-        duration: null,
-        durationUnit: null,
         percentDone: 100,
-        schedulingMode: null,
-        note: null,
-        constraintType: null,
-        constraintDate: null,
         manuallyScheduled: 1,
-        unscheduled: null,
-        ignoreResourceCalendar: null,
-        effortDriven: null,
-        inactive: null,
-        cls: null,
-        iconCls: null,
-        color: null,
-        parentIndex: null,
-        expanded: null,
-        calendar: null,
-        deadline: null,
-        direction: null,
       },
       {
         id: "465f8424-6c51-4f26-93c0-fc1b6b6ea177",
         name: "Build prototype",
         startDate: "2024-08-11T22:00:00Z",
         endDate: "2024-08-18T22:00:00Z",
-        effort: null,
-        effortUnit: null,
-        duration: null,
-        durationUnit: null,
         percentDone: 50,
-        schedulingMode: null,
-        note: null,
-        constraintType: null,
-        constraintDate: null,
         manuallyScheduled: 1,
-        unscheduled: null,
-        ignoreResourceCalendar: null,
-        effortDriven: null,
-        inactive: null,
-        cls: null,
-        iconCls: null,
-        color: null,
-        parentIndex: null,
-        expanded: null,
-        calendar: null,
-        deadline: null,
-        direction: null,
       },
       {
         id: "444",
         name: "test",
         startDate: "2024-08-12T22:00:00Z",
         endDate: "2024-08-18T22:00:00Z",
-        effort: null,
-        effortUnit: null,
-        duration: null,
-        durationUnit: null,
         percentDone: 10,
-        schedulingMode: null,
-        note: null,
-        constraintType: null,
-        constraintDate: null,
         manuallyScheduled: 1,
-        unscheduled: null,
-        ignoreResourceCalendar: null,
-        effortDriven: null,
-        inactive: null,
-        cls: null,
-        iconCls: null,
-        color: null,
-        parentIndex: null,
-        expanded: null,
-        calendar: null,
-        deadline: null,
-        direction: null,
       },
     ];
     const dependencies = [
@@ -116,27 +54,26 @@ function App() {
     ];
     setData({ tasks, dependencies });
   };
-  
+
   const modifyTask = () => {
-    const tasksData = data.tasks;
-    const updatedTasks = tasksData.map((task) => {
+    if (!data) return;
+
+    const updatedTasks = data.tasks.map((task) => {
       if (task.id === "444") {
-        return { ...task, id: "new-id", name: "new name" }; // spread the task and update the id
+        return { ...task, id: "new-id", name: "new name" };
       }
       return task;
     });
-    console.log(data.tasks, updatedTasks);
-    setData((currentData) => {
-      return {
-        dependencies: currentData.dependencies,
-        tasks: updatedTasks,
-      };
-    });
+
+    setData((currentData) => ({
+      ...currentData,
+      tasks: updatedTasks,
+    }));
   };
-  
+
   return (
     <>
-    <button onClick={modifyTask}>Modify Task 3 id and name</button>
+      <button onClick={modifyTask}>Modify Task 3 id and name</button>
       {data ? (
         <BryntumGantt
           ref={gantt}
@@ -150,8 +87,5 @@ function App() {
     </>
   );
 }
-
-// If you plan to use stateful React collections for data binding please check this guide
-// https://bryntum.com/products/gantt/docs/guide/Gantt/integration/react/data-binding
 
 export default App;
